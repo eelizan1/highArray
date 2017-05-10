@@ -27,6 +27,35 @@ public class HighArray {
                 return true;
     }
 
+    public int binaryFind(long searchKey) {
+        /*
+            CREATE RANGE
+         */
+        int lowerBound = 0;             // set to first cell of array
+        int upperBound = nElems - 1;    // set to last cell of array
+        int curIn;
+
+        // each time through the loop, divide the range in half
+        while(true) {
+            // set to middle of range
+            curIn = (lowerBound + upperBound) / 2;
+            // check if curIn is already the desired key
+            if(a[curIn] == searchKey)
+                return curIn;
+            else if(lowerBound > upperBound)
+                return nElems;
+            else {
+                // if current item is less than key
+                if(a[curIn] < searchKey)
+                    // its in upper half
+                    lowerBound = curIn + 1;
+                else
+                    // else its in the lower half
+                    upperBound = curIn - 1;
+            }
+        }
+    }
+
     public boolean delete(long value) {
         // search value
         for (int i = 0; i < nElems; i++) {
@@ -35,9 +64,11 @@ public class HighArray {
                 nElems--;
                 // then fill hole
                 for (int j = i; j < nElems; j++) {
+                    // move higher elements down by setting the next value the current index
+                    // value deleted is of index 2, so value of index 3 is now index 2
                     a[j] = a[j + 1];
                 }
-                // after found value, and filled hole, return true 
+                // after found value, and filled hole, return true
                 return true;
             }
         }
