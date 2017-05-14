@@ -87,4 +87,26 @@ public class HighArray {
             System.out.print(a[i] + " ");
         }
     }
+    /*
+     SORTING ALGORITHMS
+     */
+    // bubble sort
+    public void bubbleSort() {
+        int out, in;
+        // outer loop (backwards)
+        for(out = nElems-1; out > 1; out--)
+            // inner loop (forward)
+            for(in = 0; in < out; in++)
+                // if out of order?
+                if(a[in] > a[in + 1])
+                    // swap them
+                    swap(in, in + 1);
+    }
+    // note: may want to create swap inline the bubble sort
+    // as creating a new method creates slight overhead
+    private void swap(int one, int two) {
+        long temp = a[one];
+        a[one] = a[two];
+        a[two] = temp;
+    }
 }
